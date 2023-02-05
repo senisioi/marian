@@ -32,22 +32,21 @@ RUN apt-get update && apt-get upgrade -yq && apt-get install -yq \
 RUN wget -qO- 'https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB' | apt-key add - && sh -c 'echo deb https://apt.repos.intel.com/mkl all main > /etc/apt/sources.list.d/intel-mkl.list' && apt-get update && apt-get install -yq intel-mkl-64bit-2020.0-088
 
 
-RUN useradd marian && \
-    mkdir /home/marian && \
-    chown marian:marian /home/marian && \
-    mkdir -p /home/marian/.ssh
-
 ENV MARIANPATH /home/marian/marian
+
+# Install Marian
+# Optional:
+# RUN git clone --depth 1 --branch 1.11.0 https://github.com/senisioi/marian
+COPY . $MARIANPATH
+RUN mkdir -p $MARIANPATH
+
+
+RUN useradd marian && \
+    chown -R marian:marian /home/marian && \
+    mkdir -p /home/marian/.ssh
 
 # Change to non-root privilege
 USER marian
-
-WORKDIR /home/marian
-
-# Install Marian
-# RUN git clone --depth 1 --branch 1.11.0 https://github.com/marian-nmt/marian
-RUN mkdir -p $MARIANPATH
-COPY . MARIANPATH
 
 WORKDIR $MARIANPATH
 RUN mkdir -p build && \

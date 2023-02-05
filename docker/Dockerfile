@@ -51,7 +51,7 @@ USER marian
 WORKDIR $MARIANPATH
 RUN mkdir -p build && \
     cd build && \
-    cmake .. -DCMAKE_BUILD_TYPE=Release -DUSE_SENTENCEPIECE=ON -DCOMPILE_CPU=on -DCOMPILE_SERVER=on  && \
+    cmake .. -DCMAKE_BUILD_TYPE=Release -DUSE_SENTENCEPIECE=ON -DCOMPILE_CPU=on -DCOMPILE_SERVER=on && \
     make -j8 && \
     echo "Making examples..." && \
     cd ../examples/tools && \
@@ -62,6 +62,6 @@ RUN pip3 install langid
 
 
 # Direct the user to the examples directory
-WORKDIR $MARIANPATH/build
+WORKDIR $MARIANPATH
 ENV PATH=$PATH:$MARIANPATH/build
 

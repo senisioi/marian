@@ -45,12 +45,16 @@ USER marian
 WORKDIR /home/marian
 
 # Install Marian
-RUN git clone --depth 1 --branch 1.11.0 https://github.com/marian-nmt/marian
+# RUN git clone --depth 1 --branch 1.11.0 https://github.com/marian-nmt/marian
+RUN mkdir -p $MARIANPATH
+COPY . MARIANPATH
+
 WORKDIR $MARIANPATH
 RUN mkdir -p build && \
     cd build && \
     cmake .. -DCMAKE_BUILD_TYPE=Release -DUSE_SENTENCEPIECE=ON -DCOMPILE_CPU=on -DCOMPILE_SERVER=on  && \
     make -j8 && 
+    echo "Making examples..." && \
     cd ../examples/tools && \
     make all
 

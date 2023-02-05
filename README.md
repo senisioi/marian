@@ -13,6 +13,13 @@ Marian
 
 ### My custom branch for docker
 
+```bash
+git clone --recurse-submodules -j8 https://github.com/senisioi/marian
+docker compose up -d
+docker compose exec mrn bash
+```
+
+
 *Marian* is an efficient Neural Machine Translation framework written in pure
 C++ with minimal dependencies.
 

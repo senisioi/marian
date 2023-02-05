@@ -165,9 +165,9 @@ add_dependencies(marian marian_version) # marian must depend on it so that it ge
 # make sure all local dependencies are installed first before this is built
 add_dependencies(marian 3rd_party_installs)
 
-if(APPLE) # This is a dependency of pathie but I can't seem to link it into that CMakeLists because we're not compiling it as a library.
+#if(APPLE) # This is a dependency of pathie but I can't seem to link it into that CMakeLists because we're not compiling it as a library.
    set(EXT_LIBS ${EXT_LIBS} iconv)
-endif()
+#endif()
 
 # Add external libs to the public interface of the library
 target_link_libraries(marian ${EXT_LIBS} ${CMAKE_THREAD_LIBS_INIT})

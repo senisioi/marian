@@ -45,10 +45,22 @@ RUN useradd marian && \
     chown -R marian:marian /home/marian && \
     mkdir -p /home/marian/.ssh
 
+
+RUN wget https://ftp.gnu.org/gnu/libiconv/libiconv-1.17.tar.gz && \
+    tar -xvf libiconv-1.17.tar.gz && \
+    cd libiconv-1.17 && \
+    ./configure --prefix=/usr/local --enable-silent-rules && \
+    make && make install && \
+    ldconfig && \
+    libtool --finish /usr/local/lib
+
+
 # Change to non-root privilege
 USER marian
 
 WORKDIR $MARIANPATH
+
+
 RUN mkdir -p build && \
     cd build && \
     cmake .. -DCMAKE_BUILD_TYPE=Release -DUSE_SENTENCEPIECE=ON -DCOMPILE_CPU=on -DCOMPILE_SERVER=on && \

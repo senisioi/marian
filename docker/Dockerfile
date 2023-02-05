@@ -53,7 +53,7 @@ WORKDIR $MARIANPATH
 RUN mkdir -p build && \
     cd build && \
     cmake .. -DCMAKE_BUILD_TYPE=Release -DUSE_SENTENCEPIECE=ON -DCOMPILE_CPU=on -DCOMPILE_SERVER=on  && \
-    make -j8 && 
+    make -j8 && \
     echo "Making examples..." && \
     cd ../examples/tools && \
     make all

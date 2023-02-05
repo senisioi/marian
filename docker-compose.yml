@@ -2,7 +2,7 @@ services:
   mrn:
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: ./docker/Dockerfile
     privileged: false
     volumes:
       - .:/local

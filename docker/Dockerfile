@@ -20,6 +20,7 @@ RUN apt-get update && apt-get upgrade -yq && apt-get install -yq \
                 libprotobuf17 \
 		protobuf-compiler \
 		libprotobuf-dev \ 
+        libtool-bin \
 		openssl \ 
 		libssl-dev \ 
 		libgoogle-perftools-dev \
@@ -51,7 +52,8 @@ RUN wget https://ftp.gnu.org/gnu/libiconv/libiconv-1.17.tar.gz && \
     cd libiconv-1.17 && \
     ./configure --prefix=/usr/local --enable-silent-rules && \
     make && make install && \
-    ldconfig 
+    ldconfig &&
+    libtool --finish /usr/local/lib
 
 
 # Change to non-root privilege

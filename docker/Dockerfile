@@ -52,7 +52,7 @@ RUN wget https://ftp.gnu.org/gnu/libiconv/libiconv-1.17.tar.gz && \
     cd libiconv-1.17 && \
     ./configure --prefix=/usr/local --enable-silent-rules && \
     make && make install && \
-    ldconfig &&
+    ldconfig && \
     libtool --finish /usr/local/lib
 
 

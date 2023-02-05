@@ -1,0 +1,26 @@
+services:
+  mrn:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    privileged: false
+    volumes:
+      - .:/local
+    tty: true
+    ports:
+      - "8080:8888"
+    ipc: host
+    ulimits:
+      stack: 67108864
+      memlock: -1    
+    environment:
+      - NVIDIA_VISIBLE_DEVICES all
+      - NVIDIA_DRIVER_CAPABILITIES compute,utility
+    deploy:
+      resources:
+        reservations:
+          devices:
+          -  driver: nvidia
+             count: all
+             capabilities: [gpu]
+    #command: bash -c "cd /loc && jupyter notebook --no-browser --allow-root --ip=0.0.0.0"
